@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard Inventaris</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Sistem Inventaris</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Stok</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Laporan</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pengguna</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Sidebar & Main Content -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                <i class="bi bi-house-door"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-box-seam"></i> Stok Barang
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-clipboard-data"></i> Laporan
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-people"></i> Pengguna
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <main class="col-md-10 ms-sm-auto px-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Dashboard</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group me-2">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cards for real-time monitoring -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card text-white bg-primary mb-3">
+                            <div class="card-header">Total Stok</div>
+                            <div class="card-body">
+                                <h5 class="card-title" id="total-stok">0</h5>
+                                <p class="card-text">Jumlah total barang di gudang.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card text-white bg-success mb-3">
+                            <div class="card-header">Barang Masuk</div>
+                            <div class="card-body">
+                                <h5 class="card-title" id="barang-masuk">0</h5>
+                                <p class="card-text">Barang yang baru masuk hari ini.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card text-white bg-danger mb-3">
+                            <div class="card-header">Barang Keluar</div>
+                            <div class="card-body">
+                                <h5 class="card-title" id="barang-keluar">0</h5>
+                                <p class="card-text">Barang yang keluar hari ini.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Input Form for Transaction -->
+                 <div class="card mb-4">
+                    <div class="card-header">
+                        Tambahkan Barang ke Keranjang
+                    </div>
+                    <div class="card-body">
+                        <form id="form-transaksi">
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="nama-barang" class="form-label">Nama Barang</label>
+                                    <input type="text" id="nama-barang" class="form-control" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="jumlah-barang" class="form-label">Jumlah</label>
+                                    <input type="number" id="jumlah-barang" class="form-control" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="harga-barang" class="form-label">Harga</label>
+                                    <input type="number" id="harga-barang" class="form-control" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Tambah ke Keranjang</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Table for Transaction -->
+                <div class="card">
+                    <div class="card-header">
+                        Keranjang Transaksi
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered" id="tabel-keranjang">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nama Barang</th>
+                                    <th>Kategori</th>
+                                    <th>Qty</th>
+                                    <th>Tanggal</th>
+                                    <th>Total Harga</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <!-- Daftar barang di keranjang akan ditampilkan di sini -->
+                            </tbody>
+                        </table>
+                        <button id="proses-transaksi" class="btn btn-success">Proses Transaksi</button>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
